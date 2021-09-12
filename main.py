@@ -6,7 +6,7 @@ try:
 	from threading import Thread
 	from fake_useragent import UserAgent
 except:
-	sys.exit(f"{Y}[{R}!{Y}] {G}You Haven't Install The Package\n{Y}[{R}!{Y}] {G}Type: pip install -r req.txt")
+	sys.exit(f"{Y}[{R}!{Y}] {G}You Haven't Install The Package\n{Y}[{R}!{Y}] {G}Type: pip install -r .req.txt")
 
 def main():
 	os.system("cls" if os.name=="nt" else "clear")
