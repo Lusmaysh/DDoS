@@ -13,6 +13,6 @@
     ```
 4. Install all required libraries and run the script
     ```bash
-    pip install -r req.txt
+    pip install -r .req.txt
     python main.py
     ```
