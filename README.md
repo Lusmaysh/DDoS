@@ -12,6 +12,3 @@
     cd DDoS
     ```
 4. Install all required libraries and run the script
-    ```bash
-    python main.py
-    ```
